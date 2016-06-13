@@ -11,7 +11,7 @@
     <script src="../Scripts/js/app/app.js"></script>
 </head>
 <body ng-app="routingCrmApp" ng-controller="contactCtrl">
-    {{contact}}
+   
   
     <div class="display-table margin-tb-1_3-pr" style="height:60px;width:100%; border:1px solid #ccc;">
         <div style="width:60px;text-align:center" class="display-cell">
@@ -36,8 +36,8 @@
 
     <div class="container-fluid">
         <form name="contactForm" ng-submit="submitContact()" novalidate>
-            {{contactForm.firstname.$invalid}}
-            <div class="row margin-all-1_3-pr">
+            
+            <div class="row margin-tb-1_3-pr">
                 <!--Save Button-->
                 <div class="col-sm-12">
                     <button class="btn btn-primary">Spara</button>
@@ -47,7 +47,7 @@
             <div class="row">
                 <!---->
 
-                <div class="col-md-7">
+                <div class="col-sm-12 col-lg-7">
 
                     <div class="">
                         <div class="panel panel-default">
@@ -55,7 +55,6 @@
                                 <h3 class="panel-title">Adress</h3>
                             </div>
                             <div class="panel-body">
-                                <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="form-horizontal">
@@ -89,23 +88,23 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-horizontal">
-                                                <label class="col-sm-3 control-label">Kommun</label>
-                                                <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Kommun</label>
+                                                    <div class="col-sm-9">
 
-                                                    <select name="municipality" class="form-control"
-                                                            data-ng-model="contacts.adress.municipality">
-                                                        <option>--Välj kommun</option>
-                                                        <option value="bromölla">Bromölla</option>
-                                                    </select>
+                                                        <select name="municipality" class="form-control"
+                                                                data-ng-model="contacts.adress.municipality">
+                                                            <option>--Välj kommun</option>
+                                                            <option value="bromölla">Bromölla</option>
+                                                        </select>
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                             </div>
                             <div class="panel-body">
-                                <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-horizontal">
@@ -122,8 +121,8 @@
                                         <div class="col-sm-6">
                                             <div class="form-horizontal">
                                                 <div class="form-group">
-                                                    <label class="col-sm-2 control-label">Postnummer</label>
-                                                    <div class="col-sm-10">
+                                                    <label class="col-sm-3 control-label">Postnummer</label>
+                                                    <div class="col-sm-9">
 
                                                         <input type="text" class="form-control" id="zip" placeholder="Postnummer" />
 
@@ -133,11 +132,11 @@
                                         </div>
 
                                     </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-sm-6">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Kontakt</h3>
@@ -145,12 +144,12 @@
                                     </div>
                                     <div class="panel-body">
                                         <div class="form-horizontal">
-                                            <div ng-class="{'has-error': contactForm.$invalid}" class="form-group">
-                                                <label class="control-label col-sm-2" for="firstname">Förnamn</label>
+                                            <div ng-class="{'has-error': contactForm.firstName.$invalid}" class="form-group">
+                                                <label class="control-label col-sm-2" for="firstName">Förnamn</label>
                                                 <div class="col-sm-10">
                                                     
-                                                        <input ng-model="contact.firstname" type="text" class="form-control" id="firstname" placeholder="Förnamn *" required />
-                                                 <p ng-show="contactForm.$invalid" class="help-block">Förnamn är obligatorisk</p>
+                                                        <input ng-model="contact.firstName" type="text" name="firstName" class="form-control" id="firstName" placeholder="Förnamn *" required />
+                                                 <p ng-show="contactForm.firstName.$invalid" class="help-block">Förnamn är obligatorisk</p>
                                                 </div>
 
                                             </div>
@@ -168,14 +167,18 @@
                                                 </div>
 
                                             </div>
-                                            <div ng-class="{'has-error': contactForm.$invalid}" class="form-group">
+                                            <div ng-class="{'has-error': contactForm.status.$invalid}" class="form-group">
                                                 <label class="control-label col-sm-2" for="title">Status</label>
                                                 <div class="col-sm-10">
-                                                    <select class="form-control">
+                                                    <select ng-model="contact.status" name="status" class="form-control">
                                                         <option>Välj status</option>
-                                                        <option ng-repeat="cat in categories" value="{{ cat.type }}">{{cat.type}}</option>
+                                                        <option ng-repeat="stat in status"
+                                                                ng-selected="{{contact.status==stat.value}}"
+                                                                value="{{stat.value}}">
+                                                            {{stat.display}}
+                                                        </option>
                                                     </select>
-                                                    <p ng-show="contactForm.$invalid" class="help-block">Förnamn är obligatorisk</p>
+                                                    <p ng-show="contactForm.status.$invalid" class="help-block">Förnamn är obligatorisk</p>
                                                 </div>
                                             </div>
 
@@ -212,7 +215,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-sm-6">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Övrigt</h3>
@@ -254,7 +257,7 @@
 
 
                 </div><!--First Main Container-->
-                <div class="col-md-5"></div> <!--Secon Main Container-->
+                <div class="col-lg-5"></div> <!--Secon Main Container-->
             </div> <!--First row-->
         </form>
     </div> <!--class fluid-->

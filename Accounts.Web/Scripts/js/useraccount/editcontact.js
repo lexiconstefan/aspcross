@@ -20,9 +20,6 @@
     if (width <= 480) {
         setClasses( $('span.clickable'));
        
-    } else if (width <= 768 && width > 480) {
-        setClasses( $('span#spanother'));
-       
     }
 });
 
